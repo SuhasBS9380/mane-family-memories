@@ -2,12 +2,57 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Family Tree Management</title>
+    <script type="module">
+      import React from 'https://esm.sh/react@18.2.0'
+      import ReactDOM from 'https://esm.sh/react-dom@18.2.0/client'
+      
+      const App = () => {
+        return React.createElement('div', {
+          style: {
+            padding: '20px',
+            fontFamily: 'Arial, sans-serif',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }
+        }, React.createElement('div', {
+          style: {
+            background: 'white',
+            padding: '40px',
+            borderRadius: '12px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+            textAlign: 'center',
+            maxWidth: '500px'
+          }
+        }, [
+          React.createElement('h1', { key: 'title' }, '🌳 Family Tree'),
+          React.createElement('p', { key: 'desc' }, 'Project Structure Issue Detected'),
+          React.createElement('div', { 
+            key: 'info',
+            style: { marginTop: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '8px' }
+          }, [
+            React.createElement('p', { key: 'p1' }, 'This project requires:'),
+            React.createElement('ul', { 
+              key: 'list',
+              style: { textAlign: 'left', margin: '10px 0' }
+            }, [
+              React.createElement('li', { key: 'l1' }, 'Backend running on port 5000'),
+              React.createElement('li', { key: 'l2' }, 'Proper npm scripts in package.json'),
+              React.createElement('li', { key: 'l3' }, 'Vite development server setup')
+            ])
+          ])
+        ]))
+      }
+      
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(React.createElement(App))
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
