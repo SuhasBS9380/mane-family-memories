@@ -1,32 +1,34 @@
-import React, { useState } from 'react'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import FamilyTree from './pages/FamilyTree';
 
-function App() {
-  const [message, setMessage] = useState('Welcome to Family Tree Management')
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>🌳 Family Tree</h1>
-        <p>{message}</p>
-        <div className="info-box">
-          <h3>Project Setup Required</h3>
-          <p>This project needs proper backend configuration to work fully.</p>
-          <p>Please add the following scripts to package.json:</p>
-          <pre>
-{`{
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
-    "preview": "vite preview"
-  }
-}`}
-          </pre>
-        </div>
-      </header>
-    </div>
-  )
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" />;
 }
 
-export default App
+function App() {
+  const [authed, setAuthed] = useState(!!localStorage.getItem('token'));
+
+  useEffect(() => {
+    setAuthed(!!localStorage.getItem('token'));
+  }, []);
+
+  const handleAuth = () => setAuthed(true);
+
+  return (
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/register" element={<Register onAuth={handleAuth} />} />
+          <Route path="/login" element={<Login onAuth={handleAuth} />} />
+          <Route path="/" element={<ProtectedRoute><FamilyTree /></ProtectedRoute>} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
