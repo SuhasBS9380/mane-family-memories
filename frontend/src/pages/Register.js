@@ -23,18 +23,46 @@ export default function Register({ onAuth }) {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input name="email" placeholder="Email" value={form.email} onChange={handleChange} required type="email" />
-        <input name="password" placeholder="Password" value={form.password} onChange={handleChange} required type="password" />
-        <button type="submit">Register</button>
-      </form>
-      {error && <div style={{color:'red'}}>{error}</div>}
-      <div>
-        <span>Already have an account? </span>
-        <Link to="/login">Login here</Link>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>🌳 Join Family Tree</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input 
+              name="name" 
+              placeholder="Full Name" 
+              value={form.name} 
+              onChange={handleChange} 
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <input 
+              name="email" 
+              placeholder="Email Address" 
+              value={form.email} 
+              onChange={handleChange} 
+              required 
+              type="email" 
+            />
+          </div>
+          <div className="form-group">
+            <input 
+              name="password" 
+              placeholder="Password" 
+              value={form.password} 
+              onChange={handleChange} 
+              required 
+              type="password" 
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">Create Account</button>
+        </form>
+        <div className="auth-link">
+          <span>Already have an account? </span>
+          <Link to="/login">Login here</Link>
+        </div>
       </div>
     </div>
   );

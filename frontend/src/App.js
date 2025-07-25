@@ -25,7 +25,6 @@ function App() {
   return (
     <Router>
       <div>
-        {authed && <button onClick={handleLogout}>Logout</button>}
         <Routes>
           <Route path="/register" element={<Register onAuth={handleAuth} />} />
           <Route path="/login" element={<Login onAuth={handleAuth} />} />

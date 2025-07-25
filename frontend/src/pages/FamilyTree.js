@@ -105,44 +105,105 @@ export default function FamilyTree() {
   } catch {}
 
   return (
-    <div>
-      <h2>Family Tree</h2>
-      {error && <div style={{color:'red'}}>{error}</div>}
-      {tempPassword && tempEmail && (
-        <div style={{color:'green', marginBottom: 10}}>
-          Temporary login for new user:<br />
-          <b>Email:</b> {tempEmail}<br />
-          <b>Password:</b> {tempPassword}
+    <div className="main-container">
+      <div className="header">
+        <div className="header-content">
+          <h2>🌳 Family Tree</h2>
+          <div>
+            {isAdmin && <span style={{marginRight: 15, fontSize: 14}}>Admin Mode</span>}
+            <button className="logout-btn" onClick={() => {localStorage.removeItem('token'); window.location.reload();}}>
+              Logout
+            </button>
+          </div>
         </div>
-      )}
-      <div ref={containerRef} style={{ height: 500, border: '1px solid #ccc', marginBottom: 20 }} />
-      {isAdmin && (
-        <button onClick={() => setShowForm(f => !f)}>{showForm ? 'Cancel' : isTreeEmpty ? 'Add First Person' : 'Add Family Member'}</button>
-      )}
-      {showForm && isAdmin && (
-        <form onSubmit={handleSubmit} style={{marginTop:20}}>
-          {isTreeEmpty ? null : (
-            <>
-              <select name="existingPersonId" value={form.existingPersonId} onChange={handleFormChange} required>
-                <option value="">Select Existing Person</option>
-                {tree.nodes.map(n => (
-                  <option key={n.personId} value={n.personId}>{n.name}</option>
-                ))}
-              </select>
-              <select name="relationshipType" value={form.relationshipType} onChange={handleFormChange} required>
-                <option value="SON_OF">Son Of</option>
-                <option value="HUSBAND_OF">Husband Of</option>
-                <option value="WIFE_OF">Wife Of</option>
-                <option value="SIBLING_OF">Sibling Of</option>
-              </select>
-            </>
-          )}
-          <input name="newMemberName" placeholder="New Member Name" value={form.newMemberName} onChange={handleFormChange} required />
-          <input name="newMemberEmail" placeholder="New Member Email (optional)" value={form.newMemberEmail} onChange={handleFormChange} />
-          <input name="tempPassword" placeholder="Temporary Password" value={form.tempPassword} onChange={handleFormChange} required />
-          <button type="submit" disabled={loading}>{loading ? 'Adding...' : isTreeEmpty ? 'Add First Person' : 'Add Member'}</button>
-        </form>
-      )}
+      </div>
+
+      <div className="content">
+        {error && <div className="error-message">{error}</div>}
+        
+        {tempPassword && tempEmail && (
+          <div className="temp-credentials">
+            <h4>✅ New Member Added Successfully!</h4>
+            <p><strong>Email:</strong> {tempEmail}</p>
+            <p><strong>Temporary Password:</strong> {tempPassword}</p>
+            <p>Share these credentials with the new family member so they can log in.</p>
+          </div>
+        )}
+
+        <div className="tree-container">
+          <div ref={containerRef} style={{ height: 500, width: '100%' }} />
+        </div>
+
+        {isAdmin && (
+          <div className="tree-controls">
+            <button 
+              className="btn btn-primary" 
+              onClick={() => setShowForm(f => !f)}
+            >
+              {showForm ? 'Cancel' : isTreeEmpty ? 'Add First Person' : 'Add Family Member'}
+            </button>
+          </div>
+        )}
+
+        {showForm && isAdmin && (
+          <div className="form-container">
+            <h3>{isTreeEmpty ? 'Add First Family Member' : 'Add New Family Member'}</h3>
+            <form onSubmit={handleSubmit}>
+              {!isTreeEmpty && (
+                <div className="form-row">
+                  <select name="existingPersonId" value={form.existingPersonId} onChange={handleFormChange} required>
+                    <option value="">Select Existing Person</option>
+                    {tree.nodes.map(n => (
+                      <option key={n.personId} value={n.personId}>{n.name}</option>
+                    ))}
+                  </select>
+                  <select name="relationshipType" value={form.relationshipType} onChange={handleFormChange} required>
+                    <option value="SON_OF">Son Of</option>
+                    <option value="HUSBAND_OF">Husband Of</option>
+                    <option value="WIFE_OF">Wife Of</option>
+                    <option value="SIBLING_OF">Sibling Of</option>
+                  </select>
+                </div>
+              )}
+              <div className="form-row">
+                <input 
+                  name="newMemberName" 
+                  placeholder="New Member Name" 
+                  value={form.newMemberName} 
+                  onChange={handleFormChange} 
+                  required 
+                />
+                <input 
+                  name="newMemberEmail" 
+                  placeholder="New Member Email (optional)" 
+                  value={form.newMemberEmail} 
+                  onChange={handleFormChange} 
+                />
+                <input 
+                  name="tempPassword" 
+                  placeholder="Temporary Password" 
+                  value={form.tempPassword} 
+                  onChange={handleFormChange} 
+                  required 
+                />
+              </div>
+              <button 
+                type="submit" 
+                className="btn btn-primary" 
+                disabled={loading}
+              >
+                {loading ? 'Adding...' : isTreeEmpty ? 'Add First Person' : 'Add Member'}
+              </button>
+            </form>
+          </div>
+        )}
+
+        {!isAdmin && (
+          <div style={{textAlign: 'center', marginTop: 30, padding: 20, background: '#f8f9fa', borderRadius: 8}}>
+            <p>You can view the family tree but only administrators can add new members.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 } 
