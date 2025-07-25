@@ -1,15 +1,35 @@
-# Family Tree App
+# Family Tree Management Application
 
-Monorepo for backend (Express/Neo4j) and frontend (React).
+A React + Vite application for managing family trees with Node.js backend.
 
-## Tech Stack
-- **Backend:** Node.js (Express.js), Neo4j (official driver)
-- **Frontend:** React.js, vis-network
-- **Authentication:** JWT, bcrypt
+## Project Structure
 
-## Structure
-- `backend/` — Express.js API server
-- `frontend/` — React app (family tree visualization)
+- **Frontend**: React + Vite application  
+- **Backend**: Node.js + Express + Neo4j (separate backend folder)
 
-## Setup
-See each folder for setup instructions. 
+## Setup Instructions
+
+### Frontend (this directory)
+```bash
+npm install
+npm run dev
+```
+
+### Backend (backend folder)  
+```bash
+cd backend
+npm install
+npm start
+```
+
+## Features
+
+- Family tree visualization
+- Admin role for the first user
+- Add family members with relationships
+- Professional UI design
+- JWT authentication
+
+## Admin Access
+
+The first user who registers becomes the admin automatically and can add family members. Other users can only view the family tree after logging in with their email and temporary password.

@@ -1,128 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Family Tree</title>
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .container {
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        text-align: center;
-        max-width: 500px;
-        width: 100%;
-      }
-      h1 {
-        color: #333;
-        margin-bottom: 30px;
-        font-size: 2.5rem;
-      }
-      .buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      button {
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        min-width: 120px;
-      }
-      .btn-primary {
-        background: linear-gradient(45deg, #667eea, #764ba2);
-        color: white;
-      }
-      .btn-secondary {
-        background: #f8f9fa;
-        color: #333;
-        border: 2px solid #dee2e6;
-      }
-      button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      }
-      .status {
-        margin-top: 20px;
-        padding: 10px;
-        border-radius: 6px;
-        font-size: 14px;
-      }
-      .status.success {
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-      }
-      .status.error {
-        background: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-      }
-    </style>
+    <title>Family Tree Management</title>
   </head>
   <body>
-    <div class="container">
-      <h1>🌳 Family Tree</h1>
-      <p>Welcome to the Family Tree Management System</p>
-      <div class="buttons">
-        <button class="btn-primary" onclick="startBackend()">Start Backend</button>
-        <button class="btn-primary" onclick="startFrontend()">Start Frontend</button>
-        <button class="btn-secondary" onclick="openBackend()">Backend (Port 5000)</button>
-        <button class="btn-secondary" onclick="openFrontend()">Frontend (Port 3000)</button>
-      </div>
-      <div id="status"></div>
-      
-      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-        <h3>Instructions:</h3>
-        <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
-          <li>First, run <code>npm run install-all</code> to install all dependencies</li>
-          <li>Start the application with <code>npm run dev</code></li>
-          <li>Backend will run on <a href="http://localhost:5000" target="_blank">localhost:5000</a></li>
-          <li>Frontend will run on <a href="http://localhost:3000" target="_blank">localhost:3000</a></li>
-        </ol>
-      </div>
-    </div>
-
-    <script>
-      function showStatus(message, type) {
-        const status = document.getElementById('status');
-        status.textContent = message;
-        status.className = `status ${type}`;
-      }
-
-      function startBackend() {
-        showStatus('Starting backend server...', 'success');
-        // This is just a UI demo - actual start commands need to be run in terminal
-      }
-
-      function startFrontend() {
-        showStatus('Starting frontend application...', 'success');
-        // This is just a UI demo - actual start commands need to be run in terminal
-      }
-
-      function openBackend() {
-        window.open('http://localhost:5000/api/health', '_blank');
-      }
-
-      function openFrontend() {
-        window.open('http://localhost:3000', '_blank');
-      }
-    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
